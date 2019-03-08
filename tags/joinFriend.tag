@@ -1,19 +1,22 @@
 <joinFriend>
-<div class="" hide={this.state==="startPlayWithFriend"}>
-    <input type="text" name="" ref="gameId" placeholder="please input the gameId">
-    <button type="button" name="button" onclick={joinGame} class="btn btn-primary" >confirm</button>
-</div>
+  <div class="container">
+    <div class="buttons" hide={this.state==="startPlayWithFriend"}>
+        <h2> Please input the game ID given by your friend</h2>
+        <input type="text" name="" ref="gameId" placeholder="00000" style="margin-left:10%">
+        <button type="button" name="button" class="btn btn-primary btn-lg" onclick={joinGame} class="btn btn-primary" style="margin-left:5%" >confirm</button>
+    </div>
+  </div>
+  <play if={this.state==="startPlayWithFriend"}></play>
 
-<play if={this.state==="startPlayWithFriend"}></play>
+<script>
 
-    <script>
-joinGame(){
-this.userId=this.parent.userId;
-this.gameId=this.refs.gameId.value;
-this.userName=this.parent.userInfo.myName;
-console.log('parent', this)
-console.log('gameid',this.gameId)
-fetch('http://treasure.chrisproctor.net/players/'+ this.userId +'/games/' + this.gameId + '/join').then(response => {
+  joinGame(){
+    this.userId=this.parent.userId;
+    this.gameId=this.refs.gameId.value;
+    this.userName=this.parent.userInfo.myName;
+    console.log('parent', this)
+    console.log('gameid',this.gameId)
+  fetch('http://treasure.chrisproctor.net/players/'+ this.userId +'/games/' + this.gameId + '/join').then(response => {
      return response.json();
  }).then(data => {
      console.log(data)
@@ -25,5 +28,23 @@ fetch('http://treasure.chrisproctor.net/players/'+ this.userId +'/games/' + this
  });
      this.update()
 }
-    </script>
+</script>
+
+<style>
+ :scope{}
+
+.container {
+    background-image: url(./asset/map.jpg);
+    background-repeat:no-repeat;
+    height:1000px;
+  }
+
+.buttons {
+  padding-top: 30%;
+  padding-left: 13%;
+}
+
+
+
+</style>
 </joinFriend>
