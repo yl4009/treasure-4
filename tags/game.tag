@@ -21,7 +21,6 @@
    </div>
   </div>
 
-
   <div if={this.gameState==="invite"}>
      <p>Get ready to play with your frinds?</p>
      <button type="button" name="button" class="btn btn-primary" onclick={startGameFriend}>Start game</button>
@@ -31,7 +30,7 @@
     <play if={this.gameState==="autoplay"}||{this.gameState==="readyWithFriends"} hide={!this.gameState}></play>
   </div>
 
-  <joinFriend if={this.state==="join"}></joinFriend>
+  <joinFriend if={this.gameState==="join"}></joinFriend>
 
 
 
@@ -82,24 +81,23 @@ console.log('select',this.gameState)
 
    if(this.gameState=="invite"){
        alert("please tell your friend your room Id:" + this.gameId)
-       this.state="inviteFriend"
+       this.gameState="readyWithFriends";
+       console.log('with friends',this.userId)
+       console.log('with friends',this.gameId)
+       fetch('http://treasure.chrisproctor.net/players/'+ this.userId +'/games/' + this.gameId).then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data)
+            // Work with JSON data here
+       var treasure=data.turns[0].treasure
+         observer.trigger('play:treasure',treasure)
+        });
+
        //this.update();
    }
 }
 
-startGameFriend(){
-    this.gameState="readyWithFriends";
-    console.log('with friends',this.userId)
-    console.log('with friends',this.gameId)
-    fetch('http://treasure.chrisproctor.net/players/'+ this.userId +'/games/' + this.gameId).then(response => {
-         return response.json();
-     }).then(data => {
-         console.log(data)
-         // Work with JSON data here
-    var treasure=data.turns[0].treasure
-      observer.trigger('play:treasure',treasure)
-     });
-}
+
 
 join(){
     this.state="join";
