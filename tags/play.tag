@@ -2,7 +2,7 @@
 
 <button type="button" class="btn btn-primary" name="button" onclick={startPlay} >start play</button>
 
-<p if={this.playState==="startPlay"}> No.{this.turns} turn: treasure is {treasure}</p>
+<p if={this.playState==="startPlay"}> No.{this.turns} turn: treasure is {this.treasure}</p>
 <p if={this.playCardState==="CardPlay"}> Now, {this.userName} have {this.userTotalTeasure} treasure in total</p>
 <p if={this.playCardState==="CardPlay"}> Now, {this.opponent} have {this.oppoTotalTeasure} treasure in total</p>
 <div class="">
@@ -18,8 +18,7 @@ let tag=this;
 this.allCards=[1,2,3,4,5,6,7,8,9,10,11,12,13]
 this.playState=""
 this.btnCount=0
-
-
+this.treasure=""
 this.turns="1";
 this.youTotalTeasure=0;
 this.oppoTotalTeasure=0;
@@ -58,6 +57,8 @@ playCard(){
 
          this.oppoTurns="";
          var decideTurns=data.turns[0];
+         this.treasure=decideTurns.treasure;
+         console.log('treasure',this.treasure);
          var i=0;
          for (var key in decideTurns){
          i=i+1
@@ -89,8 +90,6 @@ playCard(){
             }
         }
 
-          console.log('treasure',this.oppoTurns);
-
              this.userTotalTeasure=data.players[userName].score
          // Work with JSON data her
 
@@ -99,8 +98,6 @@ playCard(){
      this.playCardState="CardPlay";
      this.update();
  })
-
-    var  treasure=this.treasure;
 
 }
 

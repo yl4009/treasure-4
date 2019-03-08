@@ -20,11 +20,12 @@
 <script>
 let tag=this;
 console.log(this);
+this.userName="";
 
 getChrisDataNewId(){
    this.userName=this.refs.userName.value;
 
-  fetch('http://treasure.chrisproctor.net/players/new/' + userName).then(response => {
+  fetch('http://treasure.chrisproctor.net/players/new/' + this.userName).then(response => {
         return response.json();
     }).then(data => {
         // Work with JSON data here
