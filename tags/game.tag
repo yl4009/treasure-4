@@ -1,34 +1,37 @@
 <game>
-<div class="container" hide={this.gameState||this.state==="join"}>
-   <div hide={this.state==="newGame"||this.state==="join"}>
-        <p> Do you want to start a new game to play with a bot or your friend?</p>
-        <button type="button" class="btn btn-primary" name="button" onclick={newGame}>New game</button>
-
-        <p> If your friend has already invited you and given you the room number, please click Join button</p>
-        <button type="button" class="btn btn-primary" name="button" onclick={join}>Join</button>
-        <button type="button" name="button"  class="btn btn-primary" onclick={resume}>resume previous game</button>
+  <div class="container" hide={this.gameState||this.state==="join"}>
+   <div class="buttons" hide={this.state==="newGame"||this.state==="join"}>
+        <button type="button" class="btn btn-primary btn-lg" name="button" onclick={newGame} style="margin-right:5%">Create New Game</button>
+        <button type="button" class="btn btn-primary btn-lg" name="button" onclick={join} style="margin-right:5%">Join A Game</button>
+        <button type="button" name="button"  class="btn btn-primary btn-lg" onclick={resume}>Resume Previous Game</button>
         <play if={this.gameState==="autoplay"}></play>
    </div>
-    <div class="row" if={this.state==="newGame"} hide={this.gameState==="autoplay"}
-        <p> choose game type</p>
+
+   <div class="row" if={this.state==="newGame"} hide={this.gameState==="autoplay"}>
+        <h2> Choose your opponent</h2>
         <select class="custom-select" name="" onchange={updateNewGameType}>
             <option value="">---</option>
             <option value="autoplay">Play with Bot</option>
-            <option value="invite">Invite a friend</option>
+            <option value="invite">Invite a friend to play</option>
         </select>
-    </div>
-</div>
-</div>
-<div if={this.gameState==="invite"}>
-    <p>Get ready to play with your frinds?</p>
-    <button type="button" name="button" class="btn btn-primary" onclick={startGameFriend}>Start game</button>
-</div>
+   </div>
 
-<div class="">
-<play if={this.gameState==="autoplay"}||{this.gameState==="readyWithFriends"} hide={!this.gameState}></play>
-</div>
+   <div class="tellID" show={this.gameState==="invite"}>
+     <p> please tell your friend your room Id:  {this.gameId} </p>
+   </div>
+  </div>
 
-<joinFriend if={this.state==="join"}></joinFriend>
+
+  <div if={this.gameState==="invite"}>
+     <p>Get ready to play with your frinds?</p>
+     <button type="button" name="button" class="btn btn-primary" onclick={startGameFriend}>Start game</button>
+  </div>
+
+  <div class="">
+    <play if={this.gameState==="autoplay"}||{this.gameState==="readyWithFriends"} hide={!this.gameState}></play>
+  </div>
+
+  <joinFriend if={this.state==="join"}></joinFriend>
 
 
 
@@ -80,7 +83,7 @@ console.log('select',this.gameState)
    if(this.gameState=="invite"){
        alert("please tell your friend your room Id:" + this.gameId)
        this.state="inviteFriend"
-       this.update();
+       //this.update();
    }
 }
 
@@ -108,10 +111,20 @@ join(){
  :scope{}
 
  .container {
-     background-image: url(./asset/login.jpg);
+     background-image: url(./asset/map.jpg);
      background-repeat:no-repeat;
      height:1000px;
    }
+ .buttons {
+   padding-top: 30%;
+   padding-left: 13%;
+ }
+
+ .row {
+   padding-top: 30%;
+   padding-left: 20%;
+   margin-right: 40%;
+ }
 
 </style>
 
