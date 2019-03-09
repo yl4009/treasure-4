@@ -1,19 +1,29 @@
 <play>
-
-<button type="button" class="btn btn-primary" name="button" onclick={startPlay} >start play</button>
-
-<p if={this.playState==="startPlay"}> No.{this.turns} turn: treasure is {this.treasure}</p>
-<p if={this.playCardState==="CardPlay"}> Now, {this.userName} have {this.userTotalTeasure} treasure in total</p>
-<p if={this.playCardState==="CardPlay"}> Now, {this.opponent} have {this.oppoTotalTeasure} treasure in total</p>
-<div class="">
-<button type="button" class="btn btn-success mr-md-2" name={item} id={item} onclick={playCard} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
-</div>
-
-
-
+  <div class="container-fluid">
+    <button type="button" class="btn btn-primary" name="button" onclick={startPlay} hide={this.playState==="startPlay"} >start play</button>
+  		<div class="row">
+  			<div id="left" class="col-4">
+         <div class="btn-group-vertical">
+            <button type="button" style="margin-top:5%" class="btn btn-success mr-md-2" name={item} id={item} onclick={playCard} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
+            <p if={this.playCardState==="CardPlay"}> {this.userName}'s score: {this.userTotalTeasure}</p>
+          </div>
+        </div>
+        <div id="middle" class="col-4">
+          <p if={this.playState==="startPlay"}>  Round {this.turns}: treasure is {this.treasure}</p>
+        </div>
+        <div id="right" class="col-4">
+          <p if={this.playCardState==="CardPlay"}> {this.opponent}'s score: {this.oppoTotalTeasure}</p>
+          <button type="button" style="margin-top:5%" class="btn btn-secondary mr-md-2" name={item} id={item} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
+       </div>
+    </div>
+ </div>
 
 
 <script>
+this.robotImage="robot";
+this.playerImage="girlpirate";
+this.treasureImage="treasurebox1";
+
 let tag=this;
 this.allCards=[1,2,3,4,5,6,7,8,9,10,11,12,13]
 this.playState=""
@@ -109,14 +119,21 @@ setTimeout(function(){
      })
 }, 1000);
 
-
 </script>
 
-
 <style>
-.statebu{
- height:20px;
- width:80px;
-}
+  :scope{}
+    #left {
+  			background-color: #99ccff;
+  		}
+
+  	#middle {
+  			background-color: #66ccff;
+  		}
+
+    #right {
+    			background-color: #0099cc;
+    		}
 </style>
+
 </play>
