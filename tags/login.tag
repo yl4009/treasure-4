@@ -50,9 +50,6 @@ stateLogin(){
 <style>
     :scope{}
 
- button{
-  font-size:70px;
- }
 
  p{
   font-size:30px;
