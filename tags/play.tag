@@ -13,19 +13,22 @@
         </div>
 
 
-        <div id="middle" class="col-4">
-          <p if={this.playState==="startPlay"}>  Round {this.turns}: treasure is {this.treasure}</p>
+        <div id="middle" class="col-3">
+          <p if={this.playState==="startPlay"}>  Round {this.turns}: <br>treasure is {this.treasure}</p>
           <img src="./asset/{treasureImage}.jpg" alt="player" style="height:200px;width:200px;">
         </div>
         <div id="right" class="col-1">
-          <div class="btn-group-vertical">
-            <button type="button" style="margin-top:5%" class="btn btn-secondary mr-md-2" name={item} id={item} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
-          </div>
        </div>
+
        <div class="col-3">
          <img src="./asset/{robotImage}.png" alt="player" style="height:200px;width:200px;">
          <p if={this.playCardState==="CardPlay"}> {this.opponent}'s score: {this.oppoTotalTeasure}</p>
        </div>
+
+       <div class="btn-group-vertical col-1">
+         <button type="button" style="margin-top:5%" class="btn btn-secondary mr-md-2" name={item} id={item} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
+       </div>
+
     </div>
 
 
@@ -85,12 +88,16 @@ playCard(){
          i=i+1
          };
            console.log('iiii',i);
-            if (i==1) {
+
+            if (i==1 ) {
                 var currentTurns=data.turns[1];
                 for (var key in currentTurns){
                     if (key !=userName && key!="treasure"){
                         this.oppoTurns=currentTurns[key]
+                        this.opponent=key
                         alert(this.opponent +":"+this.oppoTurns)
+                        console.log('data.turns',data.turns)
+
                     }
                     }
             } else {
