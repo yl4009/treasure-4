@@ -15,7 +15,7 @@
 
         <div id="middle" class="col-3">
           <p if={this.playState==="startPlay"}>  Round {this.turns}: <br>treasure is {this.treasure}</p>
-          <img src="./asset/{treasureImage}.jpg" alt="player" style="height:200px;width:200px;">
+          <img src="./asset/{this.treasureImage}.jpg" alt="player" style="height:200px;width:200px;">
         </div>
         <div id="right" class="col-1">
        </div>
@@ -26,7 +26,7 @@
        </div>
 
        <div class="btn-group-vertical col-1">
-         <button type="button" style="margin-top:5%" class="btn btn-secondary mr-md-2" name={item} id={item} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
+         <button type="button" style="margin-top:5%" class="btn btn-secondary mr-md-2" name={item} id={item} each={item, i in allCards} show={this.playState==="startPlay"} disabled>{item}</button>
        </div>
 
     </div>
@@ -36,7 +36,6 @@
 <script>
 this.robotImage="robot";
 this.playerImage="girlpirate";
-this.treasureImage="treasurebox1";
 
 let tag=this;
 this.allCards=[1,2,3,4,5,6,7,8,9,10,11,12,13]
@@ -56,6 +55,14 @@ this.userInfo=[{
 observer.on('play:treasure',(treasure)=>{
  this.treasure=treasure
  this.update()
+     if (this.treasure<6){
+         this.treasureImage="treasurebox1"
+     } else if(this.treasure<9) {
+         this.treasureImage="treasurebox2"
+     } else{
+         this.treasureImage="treasurebox3"
+     }
+     console.log("function",this.treasure)
  console.log('frind trasure', this.treasure)
 })
 
@@ -66,14 +73,11 @@ startPlay(){
 
 
 playCard(){
+    this.cardNumber=event.target.name;
+
     this.gameId=this.parent.gameId;
     this.userId=this.parent.userId;
     var userId=this.userId;
-    this.userInfo.push({
-        myId: userId
-    })
-    this.cardNumber=event.target.name;
-     document.getElementById(this.cardNumber).style.color = "black";
 
     fetch('http://treasure.chrisproctor.net/players/'+ this.userId +'/games/' +this.gameId + '/play/' + this.cardNumber).then(response => {
          return response.json();
@@ -82,6 +86,13 @@ playCard(){
          this.oppoTurns="";
          var decideTurns=data.turns[0];
          this.treasure=decideTurns.treasure;
+         if (this.treasure<4){
+             this.treasureImage="treasurebox1"
+         } else if(this.treasure<9) {
+             this.treasureImage="treasurebox2"
+         } else{
+             this.treasureImage="treasurebox3"
+         }
          console.log('treasure',this.treasure);
          var i=0;
          for (var key in decideTurns){
@@ -97,7 +108,6 @@ playCard(){
                         this.opponent=key
                         alert(this.opponent +":"+this.oppoTurns)
                         console.log('data.turns',data.turns)
-
                     }
                     }
             } else {
@@ -122,20 +132,14 @@ playCard(){
          // Work with JSON data her
 
      this.turns=data.turns.length;
-     alert("This button is disabled afterward.");
      this.playCardState="CardPlay";
-     this.update();
- })
 
+     this.update();
+     document.getElementById(this.cardNumber).style.color = "black";
+      alert("This button is disabled afterward.");
+ });
 }
 
-setTimeout(function(){
-    fetch('http://treasure.chrisproctor.net/players/'+ this.userId +'/games/' +this.gameId + '/play/' + this.cardNumber).then(response => {
-         return response.json();
-     }).then(data=> {
-
-     })
-}, 1000);
 
 </script>
 
