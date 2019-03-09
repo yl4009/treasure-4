@@ -1,22 +1,33 @@
 <play>
-  <div class="container-fluid">
+
     <button type="button" class="btn btn-primary" name="button" onclick={startPlay} hide={this.playState==="startPlay"} >start play</button>
   		<div class="row">
-  			<div id="left" class="col-4">
+  			<div id="left" class="col-1">
          <div class="btn-group-vertical">
             <button type="button" style="margin-top:5%" class="btn btn-success mr-md-2" name={item} id={item} onclick={playCard} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
-            <p if={this.playCardState==="CardPlay"}> {this.userName}'s score: {this.userTotalTeasure}</p>
           </div>
         </div>
+        <div class="col-3">
+          <img src="./asset/{playerImage}.png" alt="player" style="height:200px;width:200px;">
+          <p if={this.playCardState==="CardPlay"}> {this.userName}'s score: {this.userTotalTeasure}</p>
+        </div>
+
+
         <div id="middle" class="col-4">
           <p if={this.playState==="startPlay"}>  Round {this.turns}: treasure is {this.treasure}</p>
+          <img src="./asset/{treasureImage}.jpg" alt="player" style="height:200px;width:200px;">
         </div>
-        <div id="right" class="col-4">
-          <p if={this.playCardState==="CardPlay"}> {this.opponent}'s score: {this.oppoTotalTeasure}</p>
-          <button type="button" style="margin-top:5%" class="btn btn-secondary mr-md-2" name={item} id={item} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
+        <div id="right" class="col-1">
+          <div class="btn-group-vertical">
+            <button type="button" style="margin-top:5%" class="btn btn-secondary mr-md-2" name={item} id={item} each={item, i in allCards} show={this.playState==="startPlay"} >{item}</button>
+          </div>
+       </div>
+       <div class="col-3">
+         <img src="./asset/{robotImage}.png" alt="player" style="height:200px;width:200px;">
+         <p if={this.playCardState==="CardPlay"}> {this.opponent}'s score: {this.oppoTotalTeasure}</p>
        </div>
     </div>
- </div>
+
 
 
 <script>
@@ -122,18 +133,13 @@ setTimeout(function(){
 </script>
 
 <style>
-  :scope{}
-    #left {
-  			background-color: #99ccff;
-  		}
+  :scope{
+  }
+ .col-4{
+   outline: 1px dashed grey;
+ }
 
-  	#middle {
-  			background-color: #66ccff;
-  		}
 
-    #right {
-    			background-color: #0099cc;
-    		}
 </style>
 
 </play>
