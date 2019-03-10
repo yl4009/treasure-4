@@ -51,14 +51,6 @@ stateLogin(){
     :scope{}
 
 
- p{
-  font-size:30px;
- }
-
- input{
-  font-size:50px;
- }
-
  .center{
    margin-left:27%;
 
