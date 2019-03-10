@@ -1,6 +1,7 @@
 <gameOver>
-<p>Game Over {this.result}</p>
 
+<h2 class="center">Game Over. {this.result}</h2>
+<img class="center" src="./asset/{this.endImage}.jpg" alt="player" style="height:500px;width:500px;">
 
 <script>
 let tag=this
@@ -12,13 +13,22 @@ let tag=this
 var userScore=this.parent.userTotalTeasure
 var oppoScore=this.parent.youTotalTeasure
 if (userScore>oppoScore){
-    this.result="You Win"
+    this.result="You Win!"
+    this.endImage="piratewin"
 } else{
-    this.result="sorry, you loose, want to try again?"
+    this.result="Sorry, you loose, want to try again?"
+    this.endImage="sadpirate"
 }
 console.log('winnnnn',this.result)
 
 
 </script>
+
+<style>
+
+.center{
+  margin-left: 27%
+}
+</style>
 
 </gameOver>
