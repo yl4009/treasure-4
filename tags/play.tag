@@ -78,7 +78,7 @@ observer.on('play:treasure',(treasure)=>{
 startPlay(){
  console.log('this',event.target);
     this.playState="startPlay";
-    this.timer=setInterval(refreshInfo,2000)
+    this.timer=setInterval(refreshInfo,3000)
 }
 
 var fetchInfo=()=>{
