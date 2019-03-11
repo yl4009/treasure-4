@@ -39,6 +39,9 @@ getChrisDataNewId(){
 readyToStart(){
   this.loginState="readyToGo"
 }
+
+
+
 </script>
 
 

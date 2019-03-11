@@ -12,17 +12,17 @@
         <select class="custom-select" name="" onchange={updateNewGameType}>
             <option value="">---</option>
             <option value="autoplay">Play with Bot</option>
-            <option value="invite">Invite a friend to play</option>
+            <option value="invite">Playe with a friend</option>
         </select>
    </div>
 
    <div class="tellID" show={this.gameState==="invite"}>
-     <p> please tell your friend your room Id:  {this.gameId} </p>
+     <p> Your room ID:  {this.gameId}. Have your friend key in this ID to  play the same game as you. </p>
    </div>
   </div>
 
   <div if={this.gameState==="invite"}>
-     <p>Get ready to play with your frinds?</p>
+     <p>Get ready to play with your friend</p>
      <button type="button" name="button" class="btn btn-primary" onclick={startGameFriend}>Start game</button>
   </div>
 
@@ -74,7 +74,6 @@ console.log('select',this.gameState)
             console.log('autoplay',data)
        treasure=data.turns[0].treasure
             observer.trigger('play:treasure',treasure);
-        this.update();
             // Work with JSON data here
         });
    }
@@ -93,6 +92,9 @@ console.log('select',this.gameState)
          observer.trigger('play:treasure',treasure)
         });
 
+            var playFriend=true;
+            observer.trigger('playState:friend',playFriend);
+            console.log('playState:friend',playFriend)
        //this.update();
    }
 }
@@ -101,6 +103,9 @@ console.log('select',this.gameState)
 
 join(){
     this.gameState="join";
+    var playFriend=true;
+    observer.trigger('playState:friend',playFriend);
+    console.log('playState:friend',playFriend)
 }
 
 </script>
