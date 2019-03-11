@@ -11,7 +11,7 @@
    <div class="right">
     <button type="button" class="btn btn-primary" onclick="{getChrisDataOldId}">SUBMIT</button>
  </div>
-   <p if={this.stats}> Game Stats: Wins-{this.stats.wins} Losses-{this.stats.losses} <br> Ongoing Games: {this.gameWait}</p>
+   <p if={this.stats}> History record: win-{this.stats.wins} lose-{this.stats.losses} <br> games waiting: {this.gameWait}</p>
  </div>
 </div>
  <game if={this.stats}></game>
@@ -23,7 +23,6 @@ console.log(this);
 
 getChrisDataOldId(){
     var userId=this.refs.userId.value;
-    console.log('new',userId);
     console.log(userId)
     fetch('http://treasure.chrisproctor.net/players/' + userId).then(response => {
 			return response.json();
@@ -36,6 +35,7 @@ getChrisDataOldId(){
             var stats=this.stats;
             observer.trigger('stats', stats)
             this.gameWait=(data.games_waiting).length
+			console.log('new',data);
 			this.update();
             observer.trigger('userId',userId)
 console.log(this.stats)

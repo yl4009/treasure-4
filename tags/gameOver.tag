@@ -11,7 +11,7 @@ let tag=this
 //observer.on('oppoScore',(oppoScore)=>{
 //    this.oppoScore=oppoScore})
 var userScore=this.parent.userTotalTeasure
-var oppoScore=this.parent.youTotalTeasure
+var oppoScore=this.parent.oppoTotalTeasure
 if (userScore>oppoScore){
     this.result="You Win!"
     this.endImage="piratewin"
@@ -19,7 +19,8 @@ if (userScore>oppoScore){
     this.result="Sorry, you loose, want to try again?"
     this.endImage="sadpirate"
 }
-console.log('winnnnn',this.result)
+console.log('ussss',userScore)
+console.log('opppp',oppoScore)
 
 
 </script>
