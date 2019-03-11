@@ -12,11 +12,11 @@
 
     <div show={ loginState==="oldUser"} class="reveal">
       <h1> Ahoy there {this.userName} !</h1>
-      <h2 hide={this.fail}>This is your User ID: {this.userId} </h2>
-      <h2 if={this.fail}>{this.result}</h2>
-      <p hide={this.fail}>Remember it well...or else...</p>
-      <button type="button" onclick="{readyToStart}"  class="btn btn-primary" hide={ loginState==="readyToGo"||this.fail}> CONTINUE</button>
-      <button type="button" class="btn btn-primary" name="button" onclick={setName} if={this.fail}>Set name again</button>
+      <h2 hide={this.fail==="true"}>This is your User ID: {this.userId} </h2>
+      <h2 if={this.fail==="true"}>{this.result}</h2>
+      <p hide={this.fail==="true"}>Remember it well...or else...</p>
+      <button type="button" onclick="{readyToStart}"  class="btn btn-primary" hide={ loginState==="readyToGo"||this.fail==="true"}> CONTINUE</button>
+      <button type="button" class="btn btn-primary" name="button" onclick={setName} if={this.fail==="true"}>Set name again</button>
     </div>
  <oldUser show={ loginState==="readyToGo"}></oldUser>
 
@@ -37,8 +37,10 @@ getChrisDataNewId(){
         this.result=this.userId
         if (!this.userId){
         this.result="sorry, this user name is taken"
-        this.fail="fail"
-        }
+        this.fail="true"
+    } else{
+        this.fail="flase"
+    }
          this.update();
     });
 
