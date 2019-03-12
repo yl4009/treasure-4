@@ -12,12 +12,12 @@
         <select class="custom-select" name="" onchange={updateNewGameType}>
             <option value="">---</option>
             <option value="autoplay">Play with Bot</option>
-            <option value="invite">Playe with a friend</option>
+            <option value="invite">Play with a friend</option>
         </select>
    </div>
 
    <div class="tellID" show={this.gameState==="invite"}>
-     <p> Your room ID:  {this.gameId}. Have your friend key in this ID to  play the same game as you. </p>
+     <p> Your room ID is:  {this.gameId}. Have your friend key in this ID to  play the same game as you. </p>
    </div>
   </div>
 
@@ -79,7 +79,7 @@ console.log('select',this.gameState)
    }
 
    if(this.gameState=="invite"){
-       alert("please tell your friend your room Id:" + this.gameId)
+       alert("Please tell your friend the room Id is:" + this.gameId )
        this.gameState="readyWithFriends";
        console.log('with friends',this.userId)
        console.log('with friends',this.gameId)

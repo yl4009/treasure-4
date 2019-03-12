@@ -9,7 +9,7 @@
     <div class="right">
       <button type="button" onclick="{getChrisDataNewId}"  class="btn btn-primary" hide={ loginState==="oldUser" || loginState==="readyToGo"}>SUBMIT</button>
     </div>
-
+</div>
     <div show={ loginState==="oldUser"} class="reveal">
       <h1> Ahoy there {this.userName} !</h1>
       <h2 hide={this.fail==="true"}>This is your User ID: {this.userId} </h2>
